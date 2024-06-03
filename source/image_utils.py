@@ -4,6 +4,9 @@ from translate import Translator
 from transformers import DonutProcessor, VisionEncoderDecoderModel
 import sentencepiece as spm
 import torch
+import pytesseract
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Users\\letic\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe'
 
 def get_image_description(image_path, model_name="Salesforce/blip-image-captioning-large"):
     # Load the processor and model
@@ -34,23 +37,18 @@ def get_exif_data(image_path):
     return {}
 
 def extract_text_from_image(image_path):
-    # Load the processor and the model
-    processor = DonutProcessor.from_pretrained("naver-clova-ix/donut-base")
-    model = VisionEncoderDecoderModel.from_pretrained("naver-clova-ix/donut-base")
+    # Open the image
+    img = Image.open(image_path)
+    
+    # Perform OCR using Tesseract
+    text = pytesseract.image_to_string(img, lang='por')  # Language code for Portuguese
+    
+    return text
 
-    # Load and preprocess the image
-    image = Image.open(image_path).convert("RGB")
-    pixel_values = processor(images=image, return_tensors="pt").pixel_values
-    print(pixel_values, " pixel values1")
+# Path to your image
+image_path = '../resources/Infografico-1.jpg'
 
-    # Check the device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-    pixel_values = pixel_values.to(device)
-    print(pixel_values, " pixel values2")
+# Extract text from image
+extracted_text = extract_text_from_image(image_path)
 
-    # Perform the prediction
-    outputs = model.generate(pixel_values, max_length=512, num_beams=5, early_stopping=True)
-    print(outputs)
-    predicted_text = processor.batch_decode(outputs, skip_special_tokens=True)[0]
-    return predicted_text
+print("Extracted Text:", extracted_text)

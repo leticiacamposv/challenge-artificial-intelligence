@@ -1,0 +1,3 @@
+# Bibliotecas/ instaladas
+
+EM CONSTRUÇÃO
