@@ -31,5 +31,10 @@ Para extração de informações dos dados tentou-se primeiramente usando técni
 Para indexação, inicialmente se pensou no elasticsearch por ser uma ferramenta muito conhecida, versátil, poder de escalabilidade, mas tive problemas em realizar a conexão no meu pc, foi quando descobri o Whoosh que para implementação local se provou uma boa alternativa. Langchain foi utilizado para implementação de interações na cadeia do modelo, como a de captar o formato preferido.
 
 # 3. O que melhoraria se tivesse mais tempo?
-Estudaria mais sobre os motores de busca, testaria mais parâmetros, modelos e abordagens para tratamento da imagem. Além disso, caso tivesse plano premium da OpenAI, tentaria abordagens usando a api destes ou, por exemplo, modelos google
+Estruturaria uma cadeia completa usando o langchain, testaria mais parâmetros, modelos e abordagens para tratamento da imagem.
+
+Para a query/pergunta do aluno, integrar uma LLM ao final do fluxo ao invés de só pesquisar no mecanismo de indexação e talvez criar uma VectorStore com embeddings e usar RAG
+
+# 4. O que não foi implementado e foi requisito
+Fluxo para identificar dificuldade/lacunas de conhecimento do usuário. Foi incluido no fluxo, do enunciado, apenas a parte de formato preferido
 

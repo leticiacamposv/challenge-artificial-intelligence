@@ -36,11 +36,11 @@ def extract_video_metadata(video_file_path):
     """
     video = VideoFileClip(video_file_path)
     metadata = {
-        "duration": str(video.duration),
-        "size": str(video.size),
-        "fps": str(round(video.fps)),
-        "start_time": str(video.start),
-        "end_time": str(video.end)
+        "video_duration": str(video.duration),
+        "video_size": str(video.size),
+        "video_fps": str(round(video.fps)),
+        "video_start_time": str(video.start),
+        "video_end_time": str(video.end)
         }
     return metadata
 
